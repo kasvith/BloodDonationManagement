@@ -58,12 +58,23 @@
 
                         </li>
                         <li>
-                            <a href="#">Login</a>
+                            <a href="/login">Login</a>
                         </li>
                     </ul>
                 </div>
 
             </nav>
+            @if (count($errors) > 0)
+            <!-- Form Error List -->
+                <div class="alert alert-danger alert-dismissible col-md-6 text-center" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row">
                @yield('content')
             </div>
@@ -79,7 +90,7 @@
                                             ×
                                         </button>
                                         <h4 class="modal-title" id="myModalLabel">
-                                            Select acount type
+                                            Select Account Type
                                         </h4>
                                     </div>
                                     <div class="modal-body text-center">

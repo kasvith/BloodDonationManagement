@@ -50,7 +50,6 @@
                 <label class="control-label col-sm-2" for="login"></label>
                 <div class="text-center col-sm-10">
                     <button type="button" id="login" name="login" class="btn btn-default btn-lg" aria-label="">Login</button>
-
                 </div>
             </div>
 

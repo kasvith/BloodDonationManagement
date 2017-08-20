@@ -29,20 +29,32 @@ class CreateDonerTable extends Migration
         });
 
         Schema::create('doners', function (Blueprint $table){
-        	$table->string('doner_id', 30);
+        	$table->string('doner_id', 30)->primary();
         	$table->longText('medical');
         	$table->foreign('doner_id')->references('id')->on('persons')->onDelete('cascade');
         	$table->timestamps();
         });
 
+	    Schema::create('hospitals', function (Blueprint $table){
+		    $table->string('id', 30)->primary();
+		    $table->string('name');
+		    $table->string('telephone');
+		    $table->string('password');
+	    });
+
 	    Schema::create('patients', function (Blueprint $table){
-		    $table->string('patient_id', 30);
+		    $table->increments('id');
 		    $table->text('disease');
+		    $table->string('patient_id', 30);
+		    $table->string('hospital_id', 30);
+		    $table->boolean('discharged');
 		    $table->foreign('patient_id')->references('id')->on('persons')->onDelete('cascade');
+		    $table->foreign('hospital_id')->references('id')->on('hospitals')->onDelete('cascade');
 		    $table->timestamps();
 	    });
 
 	    Schema::create('person_addresses', function (Blueprint $table){
+		    $table->increments('id');
 	    	$table->string('person_id', 30);
 	    	$table->string('street');
 	    	$table->string('house_no');
@@ -52,14 +64,8 @@ class CreateDonerTable extends Migration
 		    $table->timestamps();
 	    });
 
-        Schema::create('hospitals', function (Blueprint $table){
-        	$table->string('id', 30)->primary();
-        	$table->string('name');
-        	$table->string('telephone');
-	        $table->string('password');
-        });
-
 	    Schema::create('hospital_addresses', function (Blueprint $table){
+	    	$table->increments('id');
 		    $table->string('hospital_id', 30);
 		    $table->string('street');
 		    $table->string('house_no');
@@ -80,29 +86,33 @@ class CreateDonerTable extends Migration
 	    });
 
 	    Schema::create('blood_banks', function (Blueprint $table){
-		    $table->string('id',30)->primary();
+		    $table->string('id',30)->unique()->primary();
 		    $table->string('name');
 		    $table->string('telephone');
 		    $table->string('password');
+		    $table->timestamps();
 	    });
 
 	    Schema::create('blood_bank_addresses', function (Blueprint $table){
-		    $table->string('blood_bank_id', 30);
+	    	$table->increments('id');
+		    $table->string('bloodbank_id', 30);
 		    $table->string('street');
 		    $table->string('house_no');
 		    $table->string('town');
 		    $table->string('province');
-		    $table->foreign('blood_bank_id')->references('id')->on('blood_banks')->onDelete('cascade');
+		    $table->foreign('bloodbank_id')->references('id')->on('blood_banks')->onDelete('cascade');
 		    $table->timestamps();
 	    });
 
 	    Schema::create('blood_bank_storage', function (Blueprint $table){
-		    $table->string('blood_bank_id', 30);
+	    	$table->increments('id');
+		    $table->string('bloodbank_id', 30);
 		    $table->enum('blood_group', ['AB', 'O', 'A', 'B']);
 		    $table->enum('blood_type', ['positive', 'negative']);
+		    $table->float('capacity');
 		    $table->float('amount');
 		    $table->date('last_update');
-		    $table->foreign('blood_bank_id')->references('id')->on('blood_banks')->onDelete('cascade');
+		    $table->foreign('bloodbank_id')->references('id')->on('blood_banks')->onDelete('cascade');
 		    $table->timestamps();
 	    });
 
@@ -116,23 +126,25 @@ class CreateDonerTable extends Migration
 
 	    Schema::create('blood_transfer', function (Blueprint $table){
 	    	$table->increments('id');
-	    	$table->string('blood_bank_id', 30);
+	    	$table->string('bloodbank_id', 30);
 	    	$table->date('date');
 		    $table->enum('blood_group', ['AB', 'O', 'A', 'B']);
 		    $table->enum('blood_type', ['positive', 'negative']);
 		    $table->float('amount');
-		    $table->foreign('blood_bank_id')->references('id')->on('blood_banks')->onDelete('cascade');
+		    $table->foreign('bloodbank_id')->references('id')->on('blood_banks')->onDelete('cascade');
+		    $table->timestamps();
 	    });
 
 	    Schema::create('blood_quota_receives', function (Blueprint $table){
 	    	$table->increments('id');
 	    	$table->string('hospital_id',30);
-	    	$table->string('blood_bank_id', 30);
+	    	$table->string('bloodbank_id', 30);
 		    $table->date('date');
 		    $table->enum('blood_group', ['AB', 'O', 'A', 'B']);
 		    $table->enum('blood_type', ['positive', 'negative']);
 		    $table->float('amount');
 		    $table->foreign('hospital_id')->references('id')->on('hospitals')->onDelete('cascade');
+		    $table->timestamps();
 	    });
 
 	    Schema::create('blood_receives', function (Blueprint $table){
@@ -141,6 +153,8 @@ class CreateDonerTable extends Migration
 		    $table->string('patient_id', 30);
 		    $table->float('amount');
 		    $table->foreign('patient_id')->references('id')->on('persons')->onDelete('cascade');
+		    $table->foreign('hospital_id')->references('id')->on('hospitals')->onDelete('cascade');
+		    $table->timestamps();
 	    });
     }
 
