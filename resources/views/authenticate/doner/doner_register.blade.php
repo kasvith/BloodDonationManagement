@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-md-6 col-md-offset-3">
-        <form class="form-horizontal" action="/register/auth/doner" method="post">
+        <form class="form-horizontal" action="/auth/register/doner" method="post">
             {{ csrf_field() }}
             <fieldset>
                 <!-- change col-sm-N to reflect how you would like your column spacing (http://getbootstrap.com/css/#forms-control-sizes) -->
