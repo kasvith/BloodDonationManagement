@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Doner extends Model
 {
-	public function doner() {
+	public function person() {
 		return $this->belongsTo(Person::class);
     }
 }

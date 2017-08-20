@@ -36,9 +36,9 @@ Route::get('register/pages/{type}', function ($type){
 	}
 })->name('register/pages');
 
-Route::get('auth/login', function (){
-	return view('authenticate.auth.login', ['title' => "Login", 'scripts' => []]);
-})->name('auth/login');
+Route::get('/login', function (){
+	return view('authenticate.auth.login', ['title' => "Login", 'scripts' => [asset('js/helpers/combobox.js')]]);
+})->name('/login');
 
 // Register blood bank
 Route::post('auth/register/bloodbank', function (\Illuminate\Http\Request $request){
@@ -67,7 +67,7 @@ Route::post('auth/register/bloodbank', function (\Illuminate\Http\Request $reque
 	$bloodBank->save();
 	$address->save();
 
-	return redirect('auth/login');
+	return redirect('/login');
 });
 
 Route::post('auth/register/doner', function (\Illuminate\Http\Request $request){
@@ -98,9 +98,9 @@ Route::post('auth/register/doner', function (\Illuminate\Http\Request $request){
 	$doner->medical = $request->medical;
 
 	// save all
-	$doner->doner()->associate($person);
+	$doner->person()->associate($person);
 	$person->save();
 	$doner->save();
 
-	return redirect('auth/login');
+	return redirect('/login');
 });
