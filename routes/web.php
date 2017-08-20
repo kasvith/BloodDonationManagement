@@ -95,5 +95,10 @@ Route::post('auth/register/doner', function (\Illuminate\Http\Request $request){
 
 	// Add him as a doner
 	$doner = new \App\Doner();
-	$doner
+	$doner->medical = $request->medical;
+
+	// save all
+	$doner->doner()->associate($person);
+	$person->save();
+	$doner->save();
 });
