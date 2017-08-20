@@ -15,6 +15,8 @@
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 
+    <!-- Bootstrap-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     @foreach($scripts as $script)
         <script src="{{ $script }}"></script>
     @endforeach
@@ -78,37 +80,47 @@
             <div class="row">
                @yield('content')
             </div>
-            <div class="container-fluid">
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="modal fade" id="modal-register" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
 
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                            ×
-                                        </button>
-                                        <h4 class="modal-title" id="myModalLabel">
-                                            Select Account Type
-                                        </h4>
-                                    </div>
-                                    <div class="modal-body text-center">
-                                        <div class="row modal-register-button" style="padding: 10px 10px 10px 10px;">
-                                            <button type="button" class="btn btn-lg btn-success modal-register-button" onclick="location.href ='{{ route('register/pages', ['as' => 'register', 'type' => 'doner']) }}'">
-                                                Doner
-                                            </button>
+                                    <div class="container-fluid " style="height: 300px; float: none; margin: 0 auto;">
+                                        <div class="py-5">
+                                            <div class="container-fluid" >
+                                                <div class="row" >
+                                                    <div class="col-md-12">
+                                                        <h3 class="text-primary"> Register Form </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+
+                                                        <button id="Hospital" class="btn btn-large btn-primary" style="padding: 20px; width: 150px ;padding:10px; height: 150px ; font-size: 20px; " onclick="location.href ='{{ route('register/pages', ['as' => 'register', 'type' => 'doner']) }}'" >
+                                                            <span class="glyphicon glyphicon-user"><br>Donor</span>
+                                                            <i class="icon-ok" style="font-size:30px; font: 'Lucida Bright'; vertical-align: middle;"></i>
+                                                        </button>
+
+                                                    </div>
+                                                    <div class="col-md-4" style="">
+                                                        <button id="Hospital" class="btn btn-large btn-primary" style="padding: 20px; width: 150px ;padding:10px; height: 150px ; font-size: 20px; " onclick="location.href ='{{ route('register/pages', ['as' => 'register', 'type' => 'hospital']) }}'" >
+                                                            <span class="glyphicon glyphicon-home"><br>Hospital</span>
+                                                            <i class="icon-ok" style="font-size:30px; font: 'Lucida Bright'; vertical-align: middle;"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-4">
+
+                                                        <button id="Blood_Bank" class="btn btn-large btn-primary" style="padding: 20px; width: 150px ;padding:10px; height: 150px ; font-size: 20px; " onclick="location.href ='{{ route('register/pages', ['as' => 'register', 'type' => 'blood_bank']) }}'" >
+                                                            <span class="glyphicon glyphicon-tint"><br>Blood Bank</span>
+                                                            <i class="icon-ok" style="font-size:30px; font: 'Lucida Bright'; vertical-align: middle;"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="row modal-register-button" style="padding: 10px 10px 10px 10px;" >
-                                            <button type="button" class="btn btn-lg btn-info" onclick="location.href ='{{ route('register/pages', ['as' => 'register', 'type' => 'hospital']) }}'">
-                                                Hospital
-                                            </button>
-                                        </div>
-                                        <div class="row modal-register-button" style="padding: 10px 10px 10px 10px;">
-                                            <button type="button" class="btn btn-lg btn-warning" onclick="location.href ='{{ route('register/pages', ['as' => 'register', 'type' => 'blood_bank']) }}'">
-                                                Blood Bank
-                                            </button>
-                                        </div>
+
                                     </div>
                                 </div>
 
@@ -124,4 +136,6 @@
     </div>
 </div>
 </body>
+
+
 </html>
