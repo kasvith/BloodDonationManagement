@@ -37,7 +37,7 @@ Route::get('register/pages/{type}', function ($type){
 })->name('register/pages');
 
 Route::get('auth/login', function (){
-
+	return view('authenticate.auth.login', ['title' => "Login", 'scripts' => []]);
 })->name('auth/login');
 
 // Register blood bank
@@ -67,7 +67,7 @@ Route::post('auth/register/bloodbank', function (\Illuminate\Http\Request $reque
 	$bloodBank->save();
 	$address->save();
 
-	return view('home', ['title' => 'Home', 'scripts' => []]);
+	return redirect('auth/login');
 });
 
 Route::post('auth/register/doner', function (\Illuminate\Http\Request $request){
@@ -101,4 +101,6 @@ Route::post('auth/register/doner', function (\Illuminate\Http\Request $request){
 	$doner->doner()->associate($person);
 	$person->save();
 	$doner->save();
+
+	return redirect('auth/login');
 });
