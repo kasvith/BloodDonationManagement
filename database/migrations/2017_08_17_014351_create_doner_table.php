@@ -25,6 +25,7 @@ class CreateDonerTable extends Migration
 	        $table->string('telephone');
 	        $table->string('password');
 	        $table->primary('id');
+	        $table->rememberToken();
 	        $table->timestamps();
         });
 
@@ -40,6 +41,8 @@ class CreateDonerTable extends Migration
 		    $table->string('name');
 		    $table->string('telephone');
 		    $table->string('password');
+		    $table->rememberToken();
+		    $table->timestamps();
 	    });
 
 	    Schema::create('patients', function (Blueprint $table){
@@ -90,6 +93,7 @@ class CreateDonerTable extends Migration
 		    $table->string('name');
 		    $table->string('telephone');
 		    $table->string('password');
+		    $table->rememberToken();
 		    $table->timestamps();
 	    });
 
