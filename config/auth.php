@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'doner',
+        'passwords' => 'persons',
     ],
 
     /*
@@ -38,13 +38,28 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'persons',
         ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'persons',
         ],
+
+	    'doner' => [
+	        'driver' => 'session',
+		    'provider' => 'persons',
+	    ],
+
+	    'hospital' => [
+	    	'driver' => 'session',
+		    'provider' => 'hospitals',
+	    ],
+
+	    'bloodbank' =>[
+	    	'driver' => 'session',
+		    'provider' => 'bloodbanks'
+	    ]
     ],
 
     /*
@@ -65,15 +80,25 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'persons' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Person::class,
         ],
 
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+	    'bloodbanks' => [
+	    	'driver' => 'eloquent',
+		    'model' => \App\BloodBank::class,
+	    ],
+
+	    'hospitals' => [
+	    	'driver' => 'eloquent',
+		    'model' => \App\Hospital::class,
+	    ]
     ],
 
     /*
@@ -93,7 +118,7 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'persons',
             'table' => 'password_resets',
             'expire' => 60,
         ],
